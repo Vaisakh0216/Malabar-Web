@@ -1,14 +1,69 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #9b2226;
-  --color-brand-dark: #6f1518;
-  --color-gold: #c9a227;
-  --color-cream: #fbf7ef;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Malayalam", sans-serif;
+  --color-ivory: #faf7f2;
+  --color-sand: #f1ebe1;
+  --color-linen: #e4dacb;
+  --color-ink: #1f1b16;
+  --color-muted: #6e655a;
+  --color-gold: #b08a3e;
+  --color-gold-soft: #e9d9b6;
+  --color-maroon: #7a2e2a;
+  --color-leaf: #2f5d50;
+  /* Kept for older pages: primary actions are ink, like the reference designs. */
+  --color-brand: #1f1b16;
+  --color-brand-dark: #000000;
+  --color-cream: #faf7f2;
+
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Malayalam", sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--tilt, 0deg)); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-cream);
-  color: #1d1d1f;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-gold-soft);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

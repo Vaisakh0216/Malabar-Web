@@ -45,3 +45,23 @@ export function whatsappLink(message: string) {
 export function formatINR(amount: number) {
   return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amount);
 }
+
+// Minutes left before today's same-day cut-off (IST), or null once it has passed.
+export function minutesToCutoff(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-IN", {
+    hour: "numeric",
+    minute: "numeric",
+    hourCycle: "h23",
+    timeZone: "Asia/Kolkata",
+  }).formatToParts(now);
+  const hour = Number(parts.find((p) => p.type === "hour")?.value);
+  const minute = Number(parts.find((p) => p.type === "minute")?.value);
+  const left = SAME_DAY_CUTOFF_HOUR * 60 - (hour * 60 + minute);
+  return left > 0 ? left : null;
+}
+
+export function formatDuration(minutes: number) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return h ? `${h}h ${m}m` : `${m}m`;
+}
