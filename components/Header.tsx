@@ -16,8 +16,8 @@ export default function Header() {
           <Link href="/category/women">Women</Link>
           <Link href="/category/men">Men</Link>
           <Link href="/category/kids">Kids</Link>
-          <Link href="/collection/fashion-week" className="text-brand">
-            Fashion Week
+          <Link href="/collection/trending" className="text-brand">
+            Trending
           </Link>
         </nav>
         <Link href="/cart" className="ml-auto text-sm font-medium">
@@ -28,8 +28,8 @@ export default function Header() {
         <Link href="/category/women">Women</Link>
         <Link href="/category/men">Men</Link>
         <Link href="/category/kids">Kids</Link>
-        <Link href="/collection/fashion-week" className="text-brand">
-          Fashion Week
+        <Link href="/collection/trending" className="text-brand">
+          Trending
         </Link>
       </nav>
     </header>
