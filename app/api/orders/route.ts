@@ -38,6 +38,11 @@ export async function POST(req: Request) {
     status: "placed",
     deliveryPromise: deliveryPromise(),
   };
-  await saveOrder(order);
+  try {
+    await saveOrder(order);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "We could not place your order. Please try again." }, { status: 500 });
+  }
   return NextResponse.json({ id: order.id });
 }
