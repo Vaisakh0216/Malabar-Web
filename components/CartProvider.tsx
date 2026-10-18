@@ -9,6 +9,8 @@ type Cart = {
   setQty: (productId: string, size: string, qty: number) => void;
   clear: () => void;
   count: number;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 };
 
 const CartContext = createContext<Cart | null>(null);
@@ -16,6 +18,7 @@ const KEY = "cart-v1";
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -33,6 +36,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const cart: Cart = {
     items,
+    open,
+    setOpen,
     count: items.reduce((n, i) => n + i.qty, 0),
     add(item) {
       const existing = items.find((i) => i.productId === item.productId && i.size === item.size);
@@ -41,6 +46,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           ? items.map((i) => (i === existing ? { ...i, qty: i.qty + item.qty } : i))
           : [...items, item],
       );
+      setOpen(true);
     },
     setQty(productId, size, qty) {
       update(

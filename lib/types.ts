@@ -29,6 +29,7 @@ export type Product = {
   customisable: boolean;
   returnable: boolean;
   palette: [string, string];
+  image?: string; // Photo URL; the styled placeholder shows until boutique photos are added
 };
 
 export type CartItem = {

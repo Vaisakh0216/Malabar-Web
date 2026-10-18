@@ -14,8 +14,9 @@ export default function CartPage() {
   if (!lines.length) {
     return (
       <div className="py-16 text-center">
-        <p className="text-lg font-semibold">Your bag is empty</p>
-        <Link href="/" className="mt-4 inline-block rounded-lg bg-brand px-6 py-3 font-semibold text-white">
+        <p className="font-display text-3xl">Your bag is empty</p>
+        <p className="mt-2 text-sm text-muted">Fill it with something from Calicut&apos;s boutiques.</p>
+        <Link href="/" className="mt-4 inline-block rounded-full bg-ink px-6 py-3 font-semibold text-ivory">
           Start shopping
         </Link>
       </div>
@@ -25,21 +26,21 @@ export default function CartPage() {
   return (
     <div className="grid gap-8 pt-4 md:grid-cols-[1fr_320px]">
       <div className="space-y-4">
-        <h1 className="text-xl font-bold">Your bag</h1>
+        <h1 className="font-display text-4xl tracking-tight">Your bag</h1>
         {lines.map((l) => {
           const product = getProduct(l.productId)!;
           return (
-            <div key={`${l.productId}-${l.size}`} className="flex gap-4 rounded-lg bg-white p-3">
-              <Swatch palette={product.palette} className="h-28 w-20 shrink-0 rounded-md" />
+            <div key={`${l.productId}-${l.size}`} className="flex gap-4 rounded-3xl bg-white p-3 ring-1 ring-linen">
+              <Swatch palette={product.palette} image={product.image} alt={product.name} className="h-28 w-20 shrink-0 rounded-2xl" />
               <div className="flex-1 text-sm">
                 <p className="font-semibold">{l.boutique}</p>
-                <p className="text-neutral-600">{l.name}</p>
+                <p className="text-muted">{l.name}</p>
                 <p className="mt-1">Size: {l.size}</p>
                 <div className="mt-2 flex items-center gap-3">
                   <select
                     value={l.qty}
                     onChange={(e) => setQty(l.productId, l.size, Number(e.target.value))}
-                    className="rounded-md border px-2 py-1"
+                    className="rounded-full border border-linen bg-ivory px-3 py-1"
                   >
                     {[1, 2, 3, 4, 5].map((n) => (
                       <option key={n} value={n}>
@@ -47,7 +48,7 @@ export default function CartPage() {
                       </option>
                     ))}
                   </select>
-                  <button type="button" onClick={() => setQty(l.productId, l.size, 0)} className="text-neutral-500 underline">
+                  <button type="button" onClick={() => setQty(l.productId, l.size, 0)} className="text-muted underline">
                     Remove
                   </button>
                 </div>
@@ -57,8 +58,8 @@ export default function CartPage() {
           );
         })}
       </div>
-      <aside className="h-fit space-y-2 rounded-lg bg-white p-4 text-sm">
-        <p className="font-semibold">Price details</p>
+      <aside className="h-fit space-y-2.5 rounded-3xl bg-sand p-5 text-sm md:sticky md:top-24">
+        <p className="font-display text-xl">Price details</p>
         <div className="flex justify-between">
           <span>Subtotal</span>
           <span>{formatINR(subtotal)}</span>
@@ -67,12 +68,12 @@ export default function CartPage() {
           <span>Delivery</span>
           <span>{deliveryFee ? formatINR(deliveryFee) : "Free"}</span>
         </div>
-        {deliveryFee > 0 && <p className="text-xs text-neutral-500">Free delivery above {formatINR(FREE_DELIVERY_ABOVE)}</p>}
-        <div className="flex justify-between border-t pt-2 text-base font-bold">
+        {deliveryFee > 0 && <p className="text-xs text-muted">Free delivery above {formatINR(FREE_DELIVERY_ABOVE)}</p>}
+        <div className="flex justify-between border-t border-linen pt-3 text-base font-bold">
           <span>Total</span>
           <span>{formatINR(total)}</span>
         </div>
-        <Link href="/checkout" className="block rounded-lg bg-brand py-3 text-center font-semibold text-white">
+        <Link href="/checkout" className="mt-2 block rounded-full bg-ink py-3.5 text-center font-semibold text-ivory transition hover:bg-ink/90">
           Place order
         </Link>
       </aside>

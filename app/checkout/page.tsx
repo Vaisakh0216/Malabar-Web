@@ -16,6 +16,7 @@ export default function CheckoutPage() {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
 
+  const itemCount = lines.reduce((n, l) => n + l.qty, 0);
   const pincodeOk = pincode.length === 6 && isServiceable(pincode);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -36,22 +37,28 @@ export default function CheckoutPage() {
   }
 
   if (!lines.length) {
-    return <p className="py-16 text-center">Your bag is empty.</p>;
+    return <p className="py-16 text-center font-display text-3xl">Your bag is empty.</p>;
   }
 
   return (
     <form onSubmit={submit} className="mx-auto max-w-lg space-y-6 pt-4">
-      <h1 className="text-xl font-bold">Delivery details</h1>
+      <div>
+        <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">Checkout</p>
+        <h1 className="mt-1 font-display text-4xl tracking-tight">Delivery details</h1>
+        <p className="mt-1 text-sm text-muted">
+          {itemCount} {itemCount === 1 ? "item" : "items"} · {formatINR(total)}
+        </p>
+      </div>
       <div className="space-y-3 text-sm">
-        <input name="name" required placeholder="Full name" className="w-full rounded-md border bg-white px-3 py-2.5" />
+        <input name="name" required placeholder="Full name" className="w-full rounded-xl border border-linen bg-white px-3.5 py-3 outline-none transition focus:border-ink" />
         <input
           name="phone"
           required
           pattern="[0-9]{10}"
           placeholder="Mobile number (10 digits)"
-          className="w-full rounded-md border bg-white px-3 py-2.5"
+          className="w-full rounded-xl border border-linen bg-white px-3.5 py-3 outline-none transition focus:border-ink"
         />
-        <textarea name="address" required rows={3} placeholder="House, street, landmark" className="w-full rounded-md border bg-white px-3 py-2.5" />
+        <textarea name="address" required rows={3} placeholder="House, street, landmark" className="w-full rounded-xl border border-linen bg-white px-3.5 py-3 outline-none transition focus:border-ink" />
         <input
           name="pincode"
           required
@@ -60,32 +67,32 @@ export default function CheckoutPage() {
           value={pincode}
           onChange={(e) => setPincode(e.target.value.replace(/\D/g, ""))}
           placeholder="Pincode"
-          className="w-full rounded-md border bg-white px-3 py-2.5"
+          className="w-full rounded-xl border border-linen bg-white px-3.5 py-3 outline-none transition focus:border-ink"
         />
         {pincode.length === 6 && (
-          <p className={pincodeOk ? "text-green-700" : "text-red-600"}>
+          <p className={pincodeOk ? "font-medium text-leaf" : "text-maroon"}>
             {pincodeOk ? "Same-day delivery available" : "Sorry, we deliver only within Kozhikode city for now."}
           </p>
         )}
       </div>
 
       <div className="space-y-2 text-sm">
-        <p className="font-semibold">Payment</p>
-        <label className="flex items-center gap-3 rounded-md border bg-white p-3">
-          <input type="radio" checked={payment === "cod"} onChange={() => setPayment("cod")} />
+        <p className="font-display text-xl">Payment</p>
+        <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-linen bg-white p-4 transition has-[:checked]:border-ink has-[:checked]:bg-sand">
+          <input type="radio" className="accent-ink" checked={payment === "cod"} onChange={() => setPayment("cod")} />
           Cash on delivery
         </label>
-        <label className="flex items-center gap-3 rounded-md border bg-white p-3">
-          <input type="radio" checked={payment === "online"} onChange={() => setPayment("online")} />
+        <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-linen bg-white p-4 transition has-[:checked]:border-ink has-[:checked]:bg-sand">
+          <input type="radio" className="accent-ink" checked={payment === "online"} onChange={() => setPayment("online")} />
           Pay online (UPI, cards, net banking)
         </label>
         {payment === "online" && (
-          <p className="text-xs text-neutral-500">You will get a secure payment link on WhatsApp right after placing the order.</p>
+          <p className="text-xs text-muted">You will get a secure payment link on WhatsApp right after placing the order.</p>
         )}
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <button disabled={!pincodeOk || sending} className="w-full rounded-lg bg-brand py-3 font-semibold text-white disabled:opacity-40">
+      {error && <p className="text-sm text-maroon">{error}</p>}
+      <button disabled={!pincodeOk || sending} className="w-full rounded-full bg-ink py-4 font-semibold text-ivory transition hover:bg-ink/90 disabled:opacity-40">
         {sending ? "Placing order..." : `Place order · ${formatINR(total)}`}
       </button>
     </form>
