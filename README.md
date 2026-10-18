@@ -1,6 +1,6 @@
 # Malabar Closet (working name)
 
-Mobile-first marketplace for Calicut boutiques, built for the Malabar Fashion Week launch.
+Mobile-first marketplace for Calicut boutiques.
 
 ## Run it
 
@@ -21,7 +21,7 @@ orders in `data/*.json`.
 
 ## What works
 
-- Home page with Fashion Week banner, boutique tiles, collections and best sellers
+- Home page with a trending banner, boutique tiles, collections and best sellers
 - Boutique, collection and category pages with price filter and sorting
 - Product page with sizes, same-day delivery promise, returns info and seller details
 - Custom design requests on customisable products (prepaid only, no returns)

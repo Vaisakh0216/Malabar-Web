@@ -19,7 +19,7 @@ export default function Home() {
           <h1 className="mt-2 max-w-md text-3xl font-bold sm:text-4xl">{featured.name}</h1>
           <p className="mt-2 max-w-md text-white/80">{featured.description}</p>
           <span className="mt-6 inline-block rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900">
-            Shop the edit
+            Shop now
           </span>
         </div>
       </Link>
@@ -56,7 +56,7 @@ export default function Home() {
 
       <section>
         <div className="mb-4 flex items-baseline justify-between">
-          <h2 className="text-lg font-bold">Best of the Fashion Week edit</h2>
+          <h2 className="text-lg font-bold">Trending in Calicut</h2>
           <Link href={`/collection/${featured.slug}`} className="text-sm font-medium text-brand">
             View all
           </Link>
