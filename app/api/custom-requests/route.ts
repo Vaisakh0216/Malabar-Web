@@ -29,6 +29,11 @@ export async function POST(req: Request) {
     notes: notes.slice(0, 1000),
     status: "new",
   };
-  await saveCustomRequest(request);
+  try {
+    await saveCustomRequest(request);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "We could not send your request. Please try again." }, { status: 500 });
+  }
   return NextResponse.json({ id: request.id });
 }

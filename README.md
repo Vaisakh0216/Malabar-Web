@@ -10,6 +10,15 @@ cp .env.example .env.local   # set ADMIN_PASSWORD and the WhatsApp number
 npm run dev                   # http://localhost:3000, admin at /admin (user: admin)
 ```
 
+## Database (Supabase)
+
+1. In Supabase, open SQL Editor → New query, paste `supabase/schema.sql` and run it.
+2. In Vercel (Project → Settings → Environment Variables) add `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`,
+   `ADMIN_PASSWORD` and `NEXT_PUBLIC_WHATSAPP_NUMBER`, then redeploy.
+
+The service role key is read only on the server. Without the two Supabase settings, local development stores
+orders in `data/*.json`.
+
 ## What works
 
 - Home page with Fashion Week banner, boutique tiles, collections and best sellers
@@ -23,7 +32,7 @@ npm run dev                   # http://localhost:3000, admin at /admin (user: ad
 ## Before launch
 
 - Replace the sample catalogue in `lib/catalog.ts` with real boutiques, products and photos
-- Swap the file storage in `lib/store.ts` for a database (Supabase planned) so data survives deploys
+- Run `supabase/schema.sql` and set the Supabase keys on Vercel (see above)
 - Connect the payment gateway; until then online orders get a payment link by hand
 - Fill in the brand name, WhatsApp number and grievance officer in `lib/config.ts`
 - Confirm serviceable pincodes and the 4 pm cut-off with the delivery partner
