@@ -19,7 +19,7 @@ export default function BoutiquesPage() {
           <Reveal key={b.slug} delay={i * 0.06}>
             <Link href={`/boutique/${b.slug}`} className="group block overflow-hidden rounded-3xl bg-white ring-1 ring-linen transition hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(31,27,22,0.45)]">
               <div className="overflow-hidden">
-                <Swatch palette={b.palette} monogram={b.name[0]} className="aspect-[16/10] transition-transform duration-700 group-hover:scale-105" />
+                <Swatch palette={b.palette} image={b.image} alt={b.name} monogram={b.name[0]} className="aspect-[16/10] transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="flex items-end justify-between gap-4 p-5">
                 <div>

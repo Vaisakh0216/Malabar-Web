@@ -1,4 +1,6 @@
-// Product and banner visual. Shows the boutique photo when one is set, otherwise a woven-textile
+import SwatchImage from "./SwatchImage";
+
+// Product and banner visual. Shows the photo when one is set, over a woven-textile
 // placeholder in the product's colours with a kasavu-style border.
 export default function Swatch({
   palette,
@@ -7,6 +9,7 @@ export default function Swatch({
   alt = "",
   monogram,
   className = "",
+  imageClassName = "",
 }: {
   palette: [string, string];
   label?: string;
@@ -14,15 +17,8 @@ export default function Swatch({
   alt?: string;
   monogram?: string;
   className?: string;
+  imageClassName?: string;
 }) {
-  if (image) {
-    return (
-      <div className={`relative overflow-hidden bg-sand ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt={alt} loading="lazy" className="h-full w-full object-cover" />
-      </div>
-    );
-  }
   const [base, accent] = palette;
   return (
     <div
@@ -47,6 +43,7 @@ export default function Swatch({
         <div className="h-[6px]" style={{ background: accent, opacity: 0.85 }} />
         <div className="h-px" style={{ background: accent, opacity: 0.6 }} />
       </div>
+      {image && <SwatchImage src={image} alt={alt} className={imageClassName} />}
       {label && (
         <span className="absolute left-3 top-3 rounded-full bg-white/70 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-ink/70 uppercase backdrop-blur">
           {label}
