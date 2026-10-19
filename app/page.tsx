@@ -3,18 +3,18 @@ import ProductCard from "@/components/ProductCard";
 import Swatch from "@/components/Swatch";
 import { Reveal } from "@/components/Motion";
 import { ArrowIcon, CashIcon, ReturnIcon, ScissorsIcon, TruckIcon } from "@/components/Icons";
-import { boutiques, getBoutique, getProduct, productsInCollection } from "@/lib/catalog";
+import { boutiques, getBoutique, getProduct, productsInCollection, sample } from "@/lib/catalog";
 import { deliveryPromise, formatINR, RETURN_WINDOW_HOURS, SITE_TAGLINE, whatsappLink } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
 const categories = [
-  { href: "/collection/kasavu", label: "Kasavu", palette: ["#f5e6c8", "#c9a227"] as [string, string] },
-  { href: "/collection/wedding", label: "Wedding", palette: ["#f8d7da", "#9b2226"] as [string, string] },
-  { href: "/collection/everyday-cotton", label: "Everyday", palette: ["#fde2e4", "#e76f51"] as [string, string] },
-  { href: "/category/women", label: "Women", palette: ["#efe1d1", "#7a2e2a"] as [string, string] },
-  { href: "/category/men", label: "Men", palette: ["#e0e7ff", "#3a5a9b"] as [string, string] },
-  { href: "/category/kids", label: "Kids", palette: ["#d8f3dc", "#2d6a4f"] as [string, string] },
+  { href: "/collection/kasavu", image: sample("1678705730064-a7ecbab4b3fb", 300), label: "Kasavu", palette: ["#f5e6c8", "#c9a227"] as [string, string] },
+  { href: "/collection/wedding", image: sample("1610047614301-13c63f00c032", 300), label: "Wedding", palette: ["#f8d7da", "#9b2226"] as [string, string] },
+  { href: "/collection/everyday-cotton", image: sample("1706943262459-3ef6ce03305c", 300), label: "Everyday", palette: ["#fde2e4", "#e76f51"] as [string, string] },
+  { href: "/category/women", image: sample("1610030469839-f909584b43f1", 300), label: "Women", palette: ["#efe1d1", "#7a2e2a"] as [string, string] },
+  { href: "/category/men", image: sample("1760080838961-4208536db385", 300), label: "Men", palette: ["#e0e7ff", "#3a5a9b"] as [string, string] },
+  { href: "/category/kids", image: sample("1594135356513-14291e55162a", 300), label: "Kids", palette: ["#d8f3dc", "#2d6a4f"] as [string, string] },
 ];
 
 const heroPicks = ["kh-kasavu-saree-peacock", "bb-lehenga-rose", "tt-kasavu-shirt-set"];
@@ -117,7 +117,7 @@ export default function Home() {
             <Reveal key={c.href} delay={i * 0.05} className="shrink-0">
               <Link href={c.href} className="group block w-20 text-center sm:w-auto">
                 <div className="overflow-hidden rounded-full ring-1 ring-linen transition group-hover:ring-2 group-hover:ring-gold">
-                  <Swatch palette={c.palette} className="aspect-square transition-transform duration-500 group-hover:scale-110" />
+                  <Swatch palette={c.palette} image={c.image} alt={c.label} className="aspect-square transition-transform duration-500 group-hover:scale-110" />
                 </div>
                 <p className="mt-2.5 text-sm font-medium">{c.label}</p>
               </Link>
@@ -142,7 +142,7 @@ export default function Home() {
             <Reveal key={b.slug} delay={i * 0.06} className="w-[70%] shrink-0 snap-start sm:w-auto">
               <Link href={`/boutique/${b.slug}`} className="group block overflow-hidden rounded-3xl bg-white ring-1 ring-linen transition hover:-translate-y-1 hover:shadow-[0_20px_40px_-25px_rgba(31,27,22,0.4)]">
                 <div className="relative">
-                  <Swatch palette={b.palette} monogram={b.name[0]} className="aspect-[4/3]" />
+                  <Swatch palette={b.palette} image={b.image} alt={b.name} monogram={b.name[0]} className="aspect-[4/3]" imageClassName="transition-transform duration-700 group-hover:scale-105" />
                   <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-semibold backdrop-blur">
                     {b.area}
                   </span>
@@ -179,11 +179,18 @@ export default function Home() {
       <section className="grid gap-4 md:grid-cols-2">
         <Reveal>
           <Link href="/collection/wedding" className="group relative block overflow-hidden rounded-[2rem] bg-maroon p-8 text-ivory sm:p-10">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={sample("1684868268327-7e5590bcfbd6", 900)}
+              alt=""
+              loading="lazy"
+              className="pointer-events-none absolute inset-y-0 right-0 h-full w-1/2 object-cover opacity-90 transition-transform duration-700 [mask-image:linear-gradient(to_right,transparent,black_45%)] group-hover:scale-105"
+            />
             <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full border-[28px] border-gold/30 transition-transform duration-700 group-hover:scale-110" />
-            <p className="text-xs font-semibold tracking-[0.2em] text-gold-soft uppercase">Wedding season</p>
-            <h3 className="mt-3 max-w-xs font-display text-3xl leading-tight sm:text-4xl">Bridal, groom and guest wear</h3>
-            <p className="mt-3 max-w-xs text-sm text-ivory/75">Sarees, lehengas and sherwanis from Calicut&apos;s bridal houses.</p>
-            <span className="mt-8 inline-flex items-center gap-2 rounded-full bg-ivory px-5 py-2.5 text-sm font-semibold text-ink">
+            <p className="relative text-xs font-semibold tracking-[0.2em] text-gold-soft uppercase">Wedding season</p>
+            <h3 className="relative mt-3 max-w-[60%] font-display text-3xl leading-tight sm:text-4xl">Bridal, groom and guest wear</h3>
+            <p className="relative mt-3 max-w-[55%] text-sm text-ivory/75">Sarees, lehengas and sherwanis from Calicut&apos;s bridal houses.</p>
+            <span className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-ivory px-5 py-2.5 text-sm font-semibold text-ink">
               Shop wedding <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>

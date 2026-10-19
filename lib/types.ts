@@ -6,6 +6,7 @@ export type Boutique = {
   story: string;
   commissionPct: number;
   palette: [string, string];
+  image?: string; // Shop or banner photo
 };
 
 export type Collection = {

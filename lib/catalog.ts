@@ -2,6 +2,12 @@ import type { Boutique, Collection, Product } from "./types";
 
 // Sample catalogue for building and demoing the site. Replace with the real boutiques before launch.
 
+// Stand-in photos from Unsplash (free licence) so the design can be judged with real imagery.
+// Swap each for the boutique's own photo before launch.
+export function sample(id: string, width = 900) {
+  return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=70`;
+}
+
 export const boutiques: Boutique[] = [
   {
     slug: "kasavu-house",
@@ -11,6 +17,7 @@ export const boutiques: Boutique[] = [
     story: "Family-run weavers' outlet bringing Balaramapuram and Kuthampully kasavu to Calicut.",
     commissionPct: 15,
     palette: ["#f5e6c8", "#c9a227"],
+    image: sample("1610014331379-f2a27bde2b66"),
   },
   {
     slug: "mittai-street-styles",
@@ -20,6 +27,7 @@ export const boutiques: Boutique[] = [
     story: "Cotton churidars, kurtas and shirts picked for Calicut's weather and budgets.",
     commissionPct: 12,
     palette: ["#fde2e4", "#e76f51"],
+    image: sample("1692188669857-9607ba467e9c"),
   },
   {
     slug: "beypore-bridal",
@@ -29,6 +37,7 @@ export const boutiques: Boutique[] = [
     story: "Bridal sarees, lehengas and groom's wear tailored in-house for Malabar weddings.",
     commissionPct: 18,
     palette: ["#f8d7da", "#9b2226"],
+    image: sample("1600685890506-593fdf55949b"),
   },
   {
     slug: "kallai-kids",
@@ -38,6 +47,7 @@ export const boutiques: Boutique[] = [
     story: "Pattu pavadas, kids' mundu sets and Onam outfits in sizes from 1 to 12 years.",
     commissionPct: 12,
     palette: ["#d8f3dc", "#2d6a4f"],
+    image: sample("1785393153529-107a4729b0d2"),
   },
   {
     slug: "thalassery-threads",
@@ -47,6 +57,7 @@ export const boutiques: Boutique[] = [
     story: "Double mundu, kasavu-border shirts and festive sets for men.",
     commissionPct: 12,
     palette: ["#e0e7ff", "#3a5a9b"],
+    image: sample("1650035931440-8f11f00544bf"),
   },
 ];
 
@@ -92,6 +103,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#f5e6c8", "#c9a227"],
+    image: sample("1678705730064-a7ecbab4b3fb"),
   },
   {
     id: "kh-kasavu-saree-peacock",
@@ -107,6 +119,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#f3ead3", "#b08d1a"],
+    image: sample("1706943262454-84ee74854346"),
   },
   {
     id: "kh-dhavani-set",
@@ -122,6 +135,7 @@ export const products: Product[] = [
     customisable: true,
     returnable: true,
     palette: ["#fbe7c6", "#d4a017"],
+    image: sample("1610189012906-4c0aa9b9781e"),
   },
   {
     id: "ms-cotton-churidar-teal",
@@ -137,6 +151,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#d1f0ec", "#1b7f79"],
+    image: sample("1632745994322-ac4f4bb36792"),
   },
   {
     id: "ms-anarkali-mustard",
@@ -152,6 +167,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#fff1c1", "#d99a00"],
+    image: sample("1609748340041-f5d61e061ebc"),
   },
   {
     id: "ms-short-kurti-white",
@@ -167,6 +183,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#f4f4f4", "#9aa5b1"],
+    image: sample("1610047592780-aa246f5635c2"),
   },
   {
     id: "bb-bridal-saree-red",
@@ -182,6 +199,7 @@ export const products: Product[] = [
     customisable: true,
     returnable: false,
     palette: ["#f8d7da", "#9b2226"],
+    image: sample("1610030469983-98e550d6193c"),
   },
   {
     id: "bb-lehenga-rose",
@@ -197,6 +215,7 @@ export const products: Product[] = [
     customisable: true,
     returnable: false,
     palette: ["#fbe4e0", "#c47f6b"],
+    image: sample("1617627143750-d86bc21e42bb"),
   },
   {
     id: "bb-groom-sherwani-ivory",
@@ -212,6 +231,7 @@ export const products: Product[] = [
     customisable: true,
     returnable: false,
     palette: ["#f6f0e1", "#8a7a52"],
+    image: sample("1785651524267-211a77e7d0c1"),
   },
   {
     id: "kk-pattu-pavada-green",
@@ -227,6 +247,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#d8f3dc", "#2d6a4f"],
+    image: sample("1639563853019-779fb4e41844"),
   },
   {
     id: "kk-boys-mundu-set",
@@ -242,6 +263,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#f5f0e1", "#b5952f"],
+    image: sample("1759851684030-818f50799ce5"),
   },
   {
     id: "tt-double-mundu",
@@ -257,6 +279,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#f7f3e8", "#c9a227"],
+    image: sample("1729347917808-e3e35a462fec"),
   },
   {
     id: "tt-kasavu-shirt-set",
@@ -272,6 +295,7 @@ export const products: Product[] = [
     customisable: true,
     returnable: true,
     palette: ["#f3ecd8", "#a8862a"],
+    image: sample("1744804298516-991bf12847c8"),
   },
   {
     id: "tt-linen-shirt-sky",
@@ -287,6 +311,7 @@ export const products: Product[] = [
     customisable: false,
     returnable: true,
     palette: ["#e0e7ff", "#3a5a9b"],
+    image: sample("1782329993439-6bc0cc7bc7bf"),
   },
 ];
 

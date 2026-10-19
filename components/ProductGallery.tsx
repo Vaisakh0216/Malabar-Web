@@ -5,11 +5,15 @@ import { AnimatePresence, motion } from "motion/react";
 import type { Product } from "@/lib/types";
 import Swatch from "./Swatch";
 
-// Until boutiques send photos, each view is a variation of the product's colours.
+// With a photo: front, a close-up and the colour swatch. Without one, variations of the product's colours.
 export default function ProductGallery({ product, monogram }: { product: Product; monogram?: string }) {
   const [base, accent] = product.palette;
-  const views: { label: string; palette: [string, string]; monogram?: string }[] = product.image
-    ? [{ label: "Photo", palette: product.palette }]
+  const views: { label: string; palette: [string, string]; image?: string; zoom?: boolean; monogram?: string }[] = product.image
+    ? [
+        { label: "Front", palette: [base, accent], image: product.image },
+        { label: "Detail", palette: [base, accent], image: product.image, zoom: true },
+        { label: "Colour", palette: [accent, base] },
+      ]
     : [
         { label: "Front", palette: [base, accent], monogram },
         { label: "Detail", palette: [accent, base] },
@@ -31,7 +35,7 @@ export default function ProductGallery({ product, monogram }: { product: Product
                 active === i ? "ring-2 ring-ink" : "opacity-70 hover:opacity-100"
               }`}
             >
-              <Swatch palette={v.palette} className="aspect-[3/4]" />
+              <Swatch palette={v.palette} image={v.image} imageClassName={v.zoom ? "scale-[2] origin-[50%_40%]" : ""} className="aspect-[3/4]" />
             </button>
           ))}
         </div>
@@ -47,7 +51,8 @@ export default function ProductGallery({ product, monogram }: { product: Product
           >
             <Swatch
               palette={views[active].palette}
-              image={product.image}
+              image={views[active].image}
+              imageClassName={views[active].zoom ? "scale-[2] origin-[50%_40%]" : ""}
               alt={product.name}
               monogram={views[active].monogram}
               label={product.image ? undefined : "Photo coming soon"}

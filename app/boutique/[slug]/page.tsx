@@ -17,7 +17,7 @@ export default async function BoutiquePage({ params }: { params: Promise<{ slug:
       <Reveal className="relative overflow-hidden rounded-[2rem] bg-sand">
         <div className="grid items-center gap-6 p-6 sm:grid-cols-[220px_1fr] sm:p-10">
           <div className="overflow-hidden rounded-3xl ring-4 ring-white">
-            <Swatch palette={boutique.palette} monogram={boutique.name[0]} className="aspect-square" />
+            <Swatch palette={boutique.palette} image={boutique.image} alt={boutique.name} monogram={boutique.name[0]} className="aspect-square" />
           </div>
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">{boutique.area}, Kozhikode</p>
