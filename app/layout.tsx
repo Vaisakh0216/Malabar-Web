@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/fraunces";
-import "@fontsource-variable/manrope";
+import "@fontsource-variable/roboto";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import { WishlistProvider } from "@/components/WishlistProvider";

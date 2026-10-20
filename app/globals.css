@@ -15,8 +15,8 @@
   --color-brand-dark: #000000;
   --color-cream: #faf7f2;
 
-  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Malayalam", sans-serif;
-  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Roboto Variable", Roboto, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Malayalam", sans-serif;
+  --font-display: "Roboto Variable", Roboto, ui-sans-serif, system-ui, sans-serif;
 
   --animate-marquee: marquee 28s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -65,5 +65,13 @@ body {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+/* Headings use Roboto too; a heavier weight and tighter tracking keep them distinct from body text. */
+@layer base {
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
