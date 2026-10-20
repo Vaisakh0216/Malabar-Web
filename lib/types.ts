@@ -14,6 +14,18 @@ export type Collection = {
   name: string;
   description: string;
   palette: [string, string];
+  image?: string; // Banner photo
+};
+
+export type Offer = {
+  id: string;
+  boutique?: string; // Boutique slug, when the offer belongs to one boutique
+  eyebrow: string;
+  title: string;
+  body: string;
+  cta: string;
+  href: string;
+  image: string;
 };
 
 export type Product = {

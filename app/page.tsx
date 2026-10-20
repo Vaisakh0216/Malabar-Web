@@ -1,10 +1,12 @@
 import Link from "next/link";
+import HeroCarousel from "@/components/HeroCarousel";
 import ProductCard from "@/components/ProductCard";
+import Rail from "@/components/Rail";
 import Swatch from "@/components/Swatch";
 import { Reveal } from "@/components/Motion";
 import { ArrowIcon, CashIcon, ReturnIcon, ScissorsIcon, TruckIcon } from "@/components/Icons";
-import { boutiques, getBoutique, getProduct, productsInCollection, sample } from "@/lib/catalog";
-import { deliveryPromise, formatINR, RETURN_WINDOW_HOURS, SITE_TAGLINE, whatsappLink } from "@/lib/config";
+import { boutiques, collections, getBoutique, offers, productsInCollection, sample } from "@/lib/catalog";
+import { deliveryPromise, RETURN_WINDOW_HOURS, whatsappLink } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +19,6 @@ const categories = [
   { href: "/category/kids", image: sample("1594135356513-14291e55162a", 300), label: "Kids", palette: ["#d8f3dc", "#2d6a4f"] as [string, string] },
 ];
 
-const heroPicks = ["kh-kasavu-saree-peacock", "bb-lehenga-rose", "tt-kasavu-shirt-set"];
-
 const steps = [
   { title: "Order by 4 pm", body: "Pick from boutiques across Kozhikode, pay online or cash on delivery." },
   { title: "Delivered by 9 pm", body: "Packed by the boutique and brought to your door the same evening." },
@@ -27,84 +27,86 @@ const steps = [
 
 export default function Home() {
   const trending = productsInCollection("trending").slice(0, 8);
-  const picks = heroPicks.map((id) => getProduct(id)).filter((p) => p !== undefined);
+  const boutiqueOffers = offers.filter((o) => o.boutique);
 
   return (
-    <div className="space-y-20 pt-2 sm:space-y-28">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-[2rem] bg-sand px-6 py-12 sm:px-12 sm:py-16 lg:py-20">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-soft/70 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-linen blur-3xl" />
-        <div className="relative grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-xs font-medium text-ink/80 backdrop-blur">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-leaf" />
-              {SITE_TAGLINE}
-            </p>
-            <h1 className="mt-6 font-display text-[2.6rem] leading-[1.05] font-medium tracking-tight sm:text-6xl lg:text-7xl">
-              Wear Malabar
-              <br />
-              <span className="italic text-maroon">tonight.</span>
-            </h1>
-            <p className="mt-5 max-w-md text-base text-ink/70 sm:text-lg">
-              Kasavu, wedding wear and everyday cotton from the city&apos;s favourite boutiques, at your door the same
-              day.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
-              <Link
-                href="/collection/trending"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3.5 text-sm font-semibold text-ivory transition hover:bg-ink/90 sm:px-6"
-              >
-                Shop now
-                <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/boutiques"
-                className="inline-flex items-center rounded-full border border-ink/20 bg-white/50 px-5 py-3.5 sm:px-6 text-sm font-semibold transition hover:border-ink"
-              >
-                Explore boutiques
-              </Link>
+    <div className="space-y-16 pt-2 sm:space-y-24">
+      {/* Offers and new collections */}
+      <div>
+        <HeroCarousel slides={offers} />
+        <dl className="mt-4 grid grid-cols-3 gap-2 text-[11px] sm:text-xs">
+          {[
+            { icon: TruckIcon, title: "Same-day delivery", body: "in Kozhikode" },
+            { icon: ReturnIcon, title: `${RETURN_WINDOW_HOURS}-hour returns`, body: "we collect it" },
+            { icon: CashIcon, title: "Cash on delivery", body: "or pay online" },
+          ].map(({ icon: Icon, title, body }) => (
+            <div key={title} className="flex flex-col items-center gap-1 rounded-2xl bg-sand px-2 py-3 text-center sm:flex-row sm:gap-3 sm:px-5 sm:text-left">
+              <Icon className="h-5 w-5 shrink-0 text-leaf" />
+              <div>
+                <dt className="font-semibold">{title}</dt>
+                <dd className="text-muted">{body}</dd>
+              </div>
             </div>
-            <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-ink/10 pt-6 text-xs">
-              <div>
-                <TruckIcon className="h-5 w-5 text-leaf" />
-                <dt className="mt-2 font-semibold">Same-day</dt>
-                <dd className="text-muted">delivery</dd>
-              </div>
-              <div>
-                <ReturnIcon className="h-5 w-5 text-leaf" />
-                <dt className="mt-2 font-semibold">{RETURN_WINDOW_HOURS}-hour</dt>
-                <dd className="text-muted">returns</dd>
-              </div>
-              <div>
-                <CashIcon className="h-5 w-5 text-leaf" />
-                <dt className="mt-2 font-semibold">Cash on</dt>
-                <dd className="text-muted">delivery</dd>
-              </div>
-            </dl>
-          </Reveal>
+          ))}
+        </dl>
+      </div>
 
-          <div className="relative mx-auto h-[360px] w-full max-w-sm sm:h-[440px]">
-            {picks.map((p, i) => {
-              const pos = [
-                "left-0 top-6 w-[58%] -rotate-6",
-                "right-0 top-0 w-[58%] rotate-3 [animation-delay:-2s]",
-                "left-[21%] bottom-0 w-[58%] -rotate-1 [animation-delay:-4s]",
-              ][i];
-              return (
-                <Reveal key={p.id} delay={0.15 + i * 0.12} className={`absolute ${pos}`}>
-                  <Link href={`/product/${p.id}`} className="block animate-float rounded-3xl bg-white p-2 shadow-[0_30px_60px_-30px_rgba(31,27,22,0.45)] transition hover:-translate-y-1" style={{ animationDelay: `${-i * 2}s` }}>
-                    <Swatch palette={p.palette} image={p.image} alt={p.name} monogram={getBoutique(p.boutique)?.name[0]} className="aspect-[4/5] rounded-2xl" />
-                    <div className="flex items-center justify-between px-1.5 pb-1 pt-2 text-[11px]">
-                      <span className="truncate font-medium">{p.name.split(",")[0]}</span>
-                      <span className="ml-2 shrink-0 font-semibold">{formatINR(p.price)}</span>
-                    </div>
-                  </Link>
-                </Reveal>
-              );
-            })}
+      {/* Boutique offers */}
+      <section>
+        <Reveal className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">From the boutiques</p>
+            <h2 className="mt-2 font-display text-3xl tracking-tight sm:text-4xl">Offers this week</h2>
           </div>
-        </div>
+          <Link href="/boutiques" className="hidden shrink-0 items-center gap-1 text-sm font-medium sm:inline-flex">
+            All boutiques <ArrowIcon />
+          </Link>
+        </Reveal>
+        <Rail label="Boutique offers">
+          {boutiqueOffers.map((o) => {
+            const b = getBoutique(o.boutique!)!;
+            return (
+              <Link
+                key={o.id}
+                href={o.href}
+                className="group relative block h-72 w-[80%] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink sm:w-[46%] lg:w-[31%]"
+              >
+                <div className="absolute inset-0">
+                  <Swatch palette={b.palette} image={o.image} alt="" className="h-full" imageClassName="transition-transform duration-700 group-hover:scale-105" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-[11px] font-semibold backdrop-blur">{b.name}</span>
+                <div className="absolute inset-x-0 bottom-0 p-5 text-ivory">
+                  <p className="font-display text-2xl leading-tight">{o.title}</p>
+                  <p className="mt-1 line-clamp-2 text-xs text-ivory/75">{o.body}</p>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold">
+                    {o.cta} <ArrowIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </Rail>
+      </section>
+
+      {/* Latest collections */}
+      <section>
+        <Reveal className="mb-6">
+          <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">Just in</p>
+          <h2 className="mt-2 font-display text-3xl tracking-tight sm:text-4xl">Latest collections</h2>
+        </Reveal>
+        <Rail label="Latest collections">
+          {collections.map((c) => (
+            <Link key={c.slug} href={`/collection/${c.slug}`} className="group block w-[62%] shrink-0 snap-start sm:w-[36%] lg:w-[23.5%]">
+              <div className="overflow-hidden rounded-3xl">
+                <Swatch palette={c.palette} image={c.image} alt={c.name} className="aspect-[3/4]" imageClassName="transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <p className="mt-3 font-display text-xl leading-tight">{c.name}</p>
+              <p className="mt-1 line-clamp-2 text-xs text-muted">{c.description}</p>
+              <p className="mt-1 text-xs font-medium">{productsInCollection(c.slug).length} styles</p>
+            </Link>
+          ))}
+        </Rail>
       </section>
 
       {/* Categories */}

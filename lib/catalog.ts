@@ -1,4 +1,4 @@
-import type { Boutique, Collection, Product } from "./types";
+import type { Boutique, Collection, Offer, Product } from "./types";
 
 // Sample catalogue for building and demoing the site. Replace with the real boutiques before launch.
 
@@ -67,24 +67,91 @@ export const collections: Collection[] = [
     name: "Trending in Calicut",
     description: "This week's favourites from Calicut's boutiques, delivered the same day.",
     palette: ["#1d1d1f", "#c9a227"],
+    image: sample("1610047614256-023d7c028d0b", 1200),
   },
   {
     slug: "kasavu",
     name: "Kasavu Classics",
     description: "Set mundu, kasavu sarees and gold-border essentials.",
     palette: ["#f5e6c8", "#c9a227"],
+    image: sample("1678705730064-a7ecbab4b3fb", 1200),
   },
   {
     slug: "wedding",
     name: "Malabar Weddings",
     description: "Bridal, groom and wedding-guest wear from Calicut's boutiques.",
     palette: ["#f8d7da", "#9b2226"],
+    image: sample("1610173827043-9db50e0d8ef9", 1200),
   },
   {
     slug: "everyday-cotton",
     name: "Everyday Cotton",
     description: "Breathable Kerala cotton for daily wear.",
     palette: ["#fde2e4", "#e76f51"],
+    image: sample("1632745994322-ac4f4bb36792", 1200),
+  },
+];
+
+// Home page banners. Sample offers for the demo: agree real ones with each boutique before launch.
+// Discounts shown here are not applied at checkout yet.
+export const offers: Offer[] = [
+  {
+    id: "kasavu-festive",
+    boutique: "kasavu-house",
+    eyebrow: "Kasavu House · Offer",
+    title: "Up to 20% off handwoven kasavu",
+    body: "Set mundu, sarees and dhavani sets from Balaramapuram weavers.",
+    cta: "Shop the offer",
+    href: "/boutique/kasavu-house",
+    image: sample("1678705730064-a7ecbab4b3fb", 1600),
+  },
+  {
+    id: "new-wedding",
+    eyebrow: "Latest collection",
+    title: "Malabar Weddings, new season",
+    body: "Bridal sarees, reception lehengas and groom's sherwanis, tailored in Calicut.",
+    cta: "Explore the collection",
+    href: "/collection/wedding",
+    image: sample("1610173827043-9db50e0d8ef9", 1600),
+  },
+  {
+    id: "bridal-alteration",
+    boutique: "beypore-bridal",
+    eyebrow: "Beypore Bridal · Offer",
+    title: "Free fitting on every bridal order",
+    body: "Made to measure at no extra cost. Book a home measurement on WhatsApp.",
+    cta: "See bridal wear",
+    href: "/boutique/beypore-bridal",
+    image: sample("1600685890506-593fdf55949b", 1600),
+  },
+  {
+    id: "everyday-cotton",
+    eyebrow: "Just landed",
+    title: "Everyday Cotton for Calicut summers",
+    body: "Breathable churidars, kurtis and kurtas from ₹990.",
+    cta: "Shop cotton",
+    href: "/collection/everyday-cotton",
+    image: sample("1632745994322-ac4f4bb36792", 1600),
+  },
+  {
+    id: "kids-festive",
+    boutique: "kallai-kids",
+    eyebrow: "Kallai Kids · Offer",
+    title: "Festive sets for little ones from ₹990",
+    body: "Pattu pavadas and boys' mundu sets in sizes 1 to 12 years.",
+    cta: "Shop kids",
+    href: "/boutique/kallai-kids",
+    image: sample("1639563853019-779fb4e41844", 1600),
+  },
+  {
+    id: "mens-mundu",
+    boutique: "thalassery-threads",
+    eyebrow: "Thalassery Threads · Offer",
+    title: "Buy 2 mundu, get 10% off",
+    body: "Double mundu and kasavu-border shirt sets for every occasion.",
+    cta: "Shop men",
+    href: "/boutique/thalassery-threads",
+    image: sample("1744804298516-991bf12847c8", 1600),
   },
 ];
 
