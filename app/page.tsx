@@ -11,12 +11,12 @@ import { deliveryPromise, RETURN_WINDOW_HOURS, whatsappLink } from "@/lib/config
 export const dynamic = "force-dynamic";
 
 const categories = [
-  { href: "/collection/kasavu", image: sample("34065634", 300), label: "Kasavu", palette: ["#f5e6c8", "#c9a227"] as [string, string] },
-  { href: "/collection/wedding", image: sample("31467322", 300), label: "Wedding", palette: ["#f8d7da", "#9b2226"] as [string, string] },
-  { href: "/collection/everyday-cotton", image: sample("13178920", 300), label: "Everyday", palette: ["#fde2e4", "#e76f51"] as [string, string] },
-  { href: "/category/women", image: sample("37526382", 300), label: "Women", palette: ["#efe1d1", "#7a2e2a"] as [string, string] },
-  { href: "/category/men", image: sample("8217656", 300), label: "Men", palette: ["#e0e7ff", "#3a5a9b"] as [string, string] },
-  { href: "/category/kids", image: sample("33744275", 300), label: "Kids", palette: ["#d8f3dc", "#2d6a4f"] as [string, string] },
+  { href: "/collection/kasavu", image: sample("1678705730064-a7ecbab4b3fb", 300), label: "Kasavu", palette: ["#f5e6c8", "#c9a227"] as [string, string] },
+  { href: "/collection/wedding", image: sample("1610047614301-13c63f00c032", 300), label: "Wedding", palette: ["#f8d7da", "#9b2226"] as [string, string] },
+  { href: "/collection/everyday-cotton", image: sample("1706943262459-3ef6ce03305c", 300), label: "Everyday", palette: ["#fde2e4", "#e76f51"] as [string, string] },
+  { href: "/category/women", image: sample("1610030469839-f909584b43f1", 300), label: "Women", palette: ["#efe1d1", "#7a2e2a"] as [string, string] },
+  { href: "/category/men", image: sample("1760080838961-4208536db385", 300), label: "Men", palette: ["#e0e7ff", "#3a5a9b"] as [string, string] },
+  { href: "/category/kids", image: sample("1594135356513-14291e55162a", 300), label: "Kids", palette: ["#d8f3dc", "#2d6a4f"] as [string, string] },
 ];
 
 const steps = [
@@ -183,7 +183,7 @@ export default function Home() {
           <Link href="/collection/wedding" className="group relative block overflow-hidden rounded-[2rem] bg-maroon p-8 text-ivory sm:p-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={sample("7694287", 900)}
+              src={sample("1684868268327-7e5590bcfbd6", 900)}
               alt=""
               loading="lazy"
               className="pointer-events-none absolute inset-y-0 right-0 h-full w-1/2 object-cover opacity-90 transition-transform duration-700 [mask-image:linear-gradient(to_right,transparent,black_45%)] group-hover:scale-105"
