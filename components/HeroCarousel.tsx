@@ -60,15 +60,20 @@ export default function HeroCarousel({ slides }: { slides: Offer[] }) {
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${slides.length}`}
         >
+          {/* Portrait photos: a blurred copy fills the banner, and the photo itself sits on the right,
+              anchored to the top so faces are never cropped. Full-bleed on phones. */}
+          <div className="absolute inset-0 opacity-60">
+            <SwatchImage src={slide.image} alt="" className="scale-110 blur-2xl" />
+          </div>
           <motion.div
-            initial={{ scale: 1.12 }}
+            initial={{ scale: 1.06 }}
             animate={{ scale: 1 }}
             transition={{ duration: INTERVAL / 1000 + 1, ease: "linear" }}
-            className="absolute inset-0"
+            className="absolute inset-0 sm:left-auto sm:w-[58%] sm:[mask-image:linear-gradient(to_right,transparent,black_30%)] lg:w-1/2"
           >
-            <SwatchImage src={slide.image} alt="" className="object-[50%_30%]" />
+            <SwatchImage src={slide.image} alt="" className="object-[50%_12%]" />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/40 to-ink/10 sm:bg-gradient-to-r sm:from-ink/85 sm:via-ink/45 sm:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-transparent sm:bg-gradient-to-r sm:from-ink/90 sm:via-ink/60 sm:to-transparent" />
 
           <div className="relative flex h-full flex-col justify-end p-6 pb-16 text-ivory sm:max-w-xl sm:justify-center sm:p-14">
             <motion.p

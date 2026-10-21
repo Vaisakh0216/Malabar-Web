@@ -14,6 +14,8 @@ export default function SwatchImage({ src, alt, className = "" }: { src: string;
   }, [src]);
 
   if (state === "failed") return null;
+  // Fashion photos are mostly portrait: crop from the top so faces stay in frame.
+  const position = className.includes("object-[") ? "" : "object-top";
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -24,7 +26,7 @@ export default function SwatchImage({ src, alt, className = "" }: { src: string;
       decoding="async"
       onLoad={() => setState("loaded")}
       onError={() => setState("failed")}
-      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${state === "loaded" ? "opacity-100" : "opacity-0"} ${className}`}
+      className={`absolute inset-0 h-full w-full object-cover ${position} transition-opacity duration-500 ${state === "loaded" ? "opacity-100" : "opacity-0"} ${className}`}
     />
   );
 }
